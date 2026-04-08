@@ -1,2 +1,2193 @@
 # hokkaidoutaiken
 北海道の「1日密着型リアル体験サービス」事業
+
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道リアル暮らし体験 | 1日1組限定・完全プライベート</title>
+<meta name="description" content="観光じゃない。北海道の"暮らし"を体験する。1日1組限定・完全プライベート。雪かき・牧場・ローカル飯。50,000円/1組。">
+<style>
+  /* ========== RESET & BASE ========== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --gray-100: #f8f8f6;
+    --gray-200: #efefec;
+    --gray-400: #b0afa9;
+    --gray-600: #6b6b63;
+    --gray-800: #2e2e2a;
+    --accent: #2c5f8a;
+    --accent-light: #e8f0f7;
+    --gold: #b8962e;
+    --gold-light: #f5ecd4;
+    --snow: #f0f4f8;
+    --font-ja: 'Hiragino Mincho ProN', 'Yu Mincho', 'Georgia', serif;
+    --font-sans: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    --radius: 16px;
+    --shadow: 0 8px 40px rgba(0,0,0,0.10);
+    --shadow-lg: 0 20px 80px rgba(0,0,0,0.18);
+    --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.8;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  section { padding: 96px 24px; }
+
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .container-wide {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ========== TYPOGRAPHY ========== */
+  .section-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--font-ja);
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+
+  .section-title span {
+    color: var(--accent);
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 2;
+    margin-bottom: 48px;
+  }
+
+  /* ========== BUTTONS ========== */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 18px 40px;
+    border-radius: 60px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .btn-primary:hover::before { transform: scaleX(1); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-primary:hover {
+    box-shadow: 0 12px 40px rgba(44, 95, 138, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .btn-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #06c755;
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 18px 40px;
+    border-radius: 60px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-line:hover {
+    background: #05b34b;
+    box-shadow: 0 12px 40px rgba(6, 199, 85, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 16px 36px;
+    border-radius: 60px;
+    border: 1.5px solid var(--black);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-outline:hover {
+    background: var(--black);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  /* ========== FIXED CTA ========== */
+  .fixed-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .fixed-cta.visible { transform: translateY(0); }
+
+  .fixed-cta-text {
+    color: var(--white);
+    font-size: 12px;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .fixed-cta-text strong {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+  }
+
+  .fixed-cta-badge {
+    background: #e74c3c;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  .fixed-cta-buttons {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .fixed-cta .btn-primary,
+  .fixed-cta .btn-line {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  /* ========== FADE IN ANIMATION ========== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ========== HERO ========== */
+  #hero {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
+    z-index: 1;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1548266652-99cf27701ced?w=1400&q=80');
+    background-size: cover;
+    background-position: center top;
+    transform: scale(1.05);
+    animation: heroZoom 12s ease-out forwards;
+  }
+
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.0); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 48px 28px;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding: 8px 16px;
+    border-radius: 40px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.2s both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #e74c3c;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-title {
+    font-family: var(--font-ja);
+    font-size: clamp(28px, 7vw, 56px);
+    font-weight: 400;
+    color: white;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+
+  .hero-title .accent-line {
+    display: block;
+    font-size: clamp(20px, 4.5vw, 34px);
+    opacity: 0.85;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+
+  .hero-sub {
+    font-size: clamp(14px, 2.5vw, 17px);
+    color: rgba(255,255,255,0.85);
+    line-height: 1.9;
+    margin-bottom: 36px;
+    max-width: 480px;
+    animation: fadeUp 0.8s 0.6s both;
+  }
+
+  .hero-cta-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    animation: fadeUp 0.8s 0.8s both;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 28px;
+    animation: fadeUp 0.8s 1.0s both;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-meta-item .icon {
+    font-size: 14px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== SCROLL INDICATOR ========== */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    right: 28px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    animation: fadeUp 0.8s 1.2s both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+    animation: scrollLine 2s infinite;
+  }
+
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ========== NUMBERS STRIP ========== */
+  .numbers-strip {
+    background: var(--black);
+    padding: 32px 24px;
+  }
+
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .number-item {
+    background: var(--black);
+    padding: 28px 16px;
+    text-align: center;
+  }
+
+  .number-value {
+    font-family: var(--font-ja);
+    font-size: clamp(24px, 5vw, 40px);
+    color: var(--white);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .number-value sup {
+    font-size: 0.5em;
+    vertical-align: super;
+  }
+
+  .number-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+  }
+
+  /* ========== EMPATHY ========== */
+  #empathy {
+    background: var(--gray-100);
+    padding: 80px 24px;
+  }
+
+  .empathy-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .empathy-title {
+    font-family: var(--font-ja);
+    font-size: clamp(22px, 4.5vw, 34px);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  .empathy-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+
+  .empathy-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--white);
+    padding: 18px 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--gray-800);
+    line-height: 1.7;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .empathy-list li::before {
+    content: '—';
+    color: var(--gray-400);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .empathy-arrow {
+    font-family: var(--font-ja);
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1.9;
+    padding: 28px 32px;
+    background: var(--accent-light);
+    border-radius: 16px;
+    border-left: 3px solid var(--accent);
+    text-align: left;
+  }
+
+  /* ========== CONCEPT ========== */
+  #concept {
+    background: var(--white);
+  }
+
+  .concept-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .concept-quote {
+    font-family: var(--font-ja);
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--black);
+    border-left: 3px solid var(--gold);
+    padding-left: 28px;
+    margin-bottom: 48px;
+  }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .concept-card {
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .concept-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+  }
+
+  .concept-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gray-400);
+    margin-bottom: 10px;
+  }
+
+  .concept-card-title {
+    font-family: var(--font-ja);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 12px;
+  }
+
+  .concept-card-text {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.9;
+  }
+
+  /* ========== EXPERIENCE CARDS ========== */
+  #experience {
+    background: var(--black);
+    padding: 96px 24px;
+  }
+
+  #experience .section-label { color: var(--gold); }
+  #experience .section-title { color: var(--white); }
+  #experience .section-sub { color: rgba(255,255,255,0.5); }
+
+  .exp-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .exp-card {
+    position: relative;
+    height: 480px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+  }
+
+  .exp-card-img {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .exp-card:hover .exp-card-img { transform: scale(1.05); }
+
+  .exp-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%);
+    z-index: 1;
+  }
+
+  .exp-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 32px;
+    z-index: 2;
+  }
+
+  .exp-card-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .exp-card-title {
+    font-family: var(--font-ja);
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 400;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .exp-card-scene {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 2;
+    max-width: 520px;
+    margin-bottom: 20px;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .exp-tag {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 5px 12px;
+    border-radius: 30px;
+  }
+
+  /* ========== TIMELINE ========== */
+  #timeline {
+    background: var(--white);
+  }
+
+  .timeline-wrap {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 48px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--gold), transparent);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 0;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .timeline-time {
+    text-align: center;
+    padding-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 3px var(--accent-light);
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-hour {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--black);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timeline-ampm {
+    font-size: 10px;
+    color: var(--gray-400);
+    letter-spacing: 0.1em;
+  }
+
+  .timeline-body {
+    background: var(--gray-100);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-left: 16px;
+    border-left: 3px solid transparent;
+    transition: var(--transition);
+  }
+
+  .timeline-body:hover {
+    border-left-color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .timeline-event {
+    font-family: var(--font-ja);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .timeline-detail {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.9;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  /* ========== COMPARISON ========== */
+  #comparison {
+    background: var(--gray-100);
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .comparison-table th {
+    padding: 18px 16px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 13px;
+  }
+
+  .comparison-table th:first-child {
+    background: var(--gray-200);
+    color: var(--gray-600);
+    text-align: left;
+    padding-left: 24px;
+  }
+
+  .comparison-table th:nth-child(2) {
+    background: var(--gray-200);
+    color: var(--gray-600);
+  }
+
+  .comparison-table th:nth-child(3) {
+    background: var(--gray-200);
+    color: var(--gray-600);
+  }
+
+  .comparison-table th:last-child {
+    background: var(--black);
+    color: var(--white);
+    position: relative;
+  }
+
+  .comparison-table th:last-child::after {
+    content: '★ おすすめ';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: white;
+    font-size: 9px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .comparison-table td {
+    padding: 16px;
+    text-align: center;
+    border-top: 1px solid var(--gray-200);
+    background: var(--white);
+    color: var(--gray-800);
+  }
+
+  .comparison-table td:first-child {
+    text-align: left;
+    padding-left: 24px;
+    font-weight: 500;
+    color: var(--black);
+    background: var(--gray-100);
+  }
+
+  .comparison-table td:last-child {
+    background: var(--accent-light);
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .comparison-table tr:hover td { filter: brightness(0.97); }
+
+  .check { color: #27ae60; font-size: 18px; }
+  .cross { color: #e74c3c; font-size: 18px; }
+  .triangle { color: var(--gold); font-size: 16px; }
+
+  /* ========== STORY ========== */
+  #story {
+    background: var(--white);
+  }
+
+  .story-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .story-img-wrap {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 32px;
+    border: 3px solid var(--gray-200);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  .story-name {
+    font-family: var(--font-ja);
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .story-role {
+    font-size: 12px;
+    color: var(--gray-400);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+  }
+
+  .story-text {
+    font-size: 15px;
+    color: var(--gray-800);
+    line-height: 2.2;
+  }
+
+  .story-text p { margin-bottom: 24px; }
+
+  .story-highlight {
+    font-family: var(--font-ja);
+    font-size: 18px;
+    color: var(--black);
+    border-left: 3px solid var(--gold);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: var(--gold-light);
+    border-radius: 0 12px 12px 0;
+  }
+
+  /* ========== PRICING ========== */
+  #pricing {
+    background: var(--black);
+    padding: 96px 24px;
+  }
+
+  #pricing .section-label { color: var(--gold); }
+  #pricing .section-title { color: var(--white); }
+  #pricing .section-sub { color: rgba(255,255,255,0.5); }
+
+  .price-card {
+    background: var(--gray-800);
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+  }
+
+  .price-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(232,64,48,0.15);
+    border: 1px solid rgba(232,64,48,0.3);
+    color: #ff6b6b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    border-radius: 30px;
+    margin-bottom: 24px;
+  }
+
+  .price-main {
+    font-size: clamp(14px, 3vw, 18px);
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .price-value {
+    font-size: clamp(48px, 10vw, 80px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .price-value sup {
+    font-size: 0.35em;
+    vertical-align: super;
+    font-weight: 400;
+    color: var(--gray-400);
+  }
+
+  .price-value sub {
+    font-size: 0.25em;
+    vertical-align: baseline;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .price-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 32px;
+  }
+
+  .price-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+  }
+
+  .price-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .price-features li::before {
+    content: '✓';
+    width: 22px;
+    height: 22px;
+    background: rgba(44, 95, 138, 0.3);
+    color: #6ab0e0;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .price-per-person {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+
+  .price-per-person-title {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .price-breakdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    text-align: center;
+  }
+
+  .price-breakdown-item {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 10px 6px;
+  }
+
+  .price-breakdown-num {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+  }
+
+  .price-breakdown-val {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .price-breakdown-val.highlight {
+    color: var(--gold);
+  }
+
+  /* ========== SCARCITY ========== */
+  #scarcity {
+    background: linear-gradient(135deg, var(--accent) 0%, #1a3a5c 100%);
+    padding: 72px 24px;
+    text-align: center;
+  }
+
+  .scarcity-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .scarcity-title {
+    font-family: var(--font-ja);
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 400;
+    color: white;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .scarcity-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.9;
+    margin-bottom: 40px;
+  }
+
+  .calendar-preview {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    max-width: 360px;
+    margin: 0 auto 40px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .cal-day {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .cal-day.full {
+    background: rgba(231, 76, 60, 0.3);
+    color: rgba(255,255,255,0.5);
+    text-decoration: line-through;
+  }
+
+  .cal-day.available {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .cal-day.available:hover {
+    background: rgba(255,255,255,0.25);
+  }
+
+  .cal-day.empty {
+    background: transparent;
+  }
+
+  .scarcity-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .scarcity-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ========== REVIEWS ========== */
+  #reviews {
+    background: var(--gray-100);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    position: relative;
+    transition: var(--transition);
+    border: 1px solid transparent;
+  }
+
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--gray-200);
+  }
+
+  .review-quote-icon {
+    font-family: Georgia, serif;
+    font-size: 64px;
+    color: var(--gray-200);
+    line-height: 1;
+    margin-bottom: -8px;
+    display: block;
+  }
+
+  .review-stars {
+    color: var(--gold);
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .review-text {
+    font-size: 15px;
+    color: var(--gray-800);
+    line-height: 2;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .review-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--gray-600);
+    font-size: 16px;
+  }
+
+  .review-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+  }
+
+  .review-meta {
+    font-size: 12px;
+    color: var(--gray-400);
+    margin-top: 2px;
+  }
+
+  .review-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+
+  /* ========== SAFETY ========== */
+  #safety {
+    background: var(--white);
+  }
+
+  .safety-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .safety-card {
+    background: var(--gray-100);
+    border-radius: 16px;
+    padding: 28px 24px;
+    border-left: 3px solid var(--accent);
+    transition: var(--transition);
+  }
+
+  .safety-card:hover {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+  }
+
+  .safety-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .safety-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .safety-text {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.9;
+  }
+
+  /* ========== FAQ ========== */
+  #faq {
+    background: var(--gray-100);
+  }
+
+  .faq-list {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+    transition: var(--transition);
+  }
+
+  .faq-item:first-child { border-radius: 12px 12px 4px 4px; }
+  .faq-item:last-child { border-radius: 4px 4px 12px 12px; }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+    font-family: var(--font-sans);
+    transition: var(--transition);
+  }
+
+  .faq-question:hover { background: var(--gray-100); }
+
+  .faq-q-icon {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 28px;
+  }
+
+  .faq-q-text { flex: 1; line-height: 1.5; }
+
+  .faq-toggle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--gray-600);
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+
+  .faq-item.open .faq-toggle {
+    background: var(--accent);
+    color: white;
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding: 0 28px 24px 56px;
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 2;
+  }
+
+  .faq-item.open .faq-answer { display: block; }
+
+  /* ========== FINAL CTA ========== */
+  #final-cta {
+    background: var(--white);
+    padding: 96px 24px;
+    text-align: center;
+  }
+
+  .final-cta-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .final-cta-title {
+    font-family: var(--font-ja);
+    font-size: clamp(24px, 5vw, 38px);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .final-cta-sub {
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 2;
+    margin-bottom: 48px;
+  }
+
+  .final-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .final-cta-buttons .btn-primary,
+  .final-cta-buttons .btn-line {
+    width: 100%;
+    max-width: 360px;
+    padding: 20px 40px;
+    font-size: 16px;
+  }
+
+  .final-note {
+    font-size: 12px;
+    color: var(--gray-400);
+    line-height: 1.8;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--black);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: var(--font-ja);
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .footer-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 600px) {
+    section { padding: 72px 20px; }
+
+    .concept-grid { grid-template-columns: 1fr; }
+
+    .safety-grid { grid-template-columns: 1fr; }
+
+    .comparison-table {
+      font-size: 12px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 12px 8px;
+    }
+
+    .comparison-table td:first-child {
+      padding-left: 12px;
+    }
+
+    .fixed-cta-text { display: none; }
+
+    .price-breakdown {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .timeline-line { left: 40px; }
+    .timeline-item { grid-template-columns: 80px 1fr; }
+
+    .hero-cta-wrap { flex-direction: column; }
+    .hero-cta-wrap .btn-outline { text-align: center; }
+
+    .exp-card { height: 400px; }
+
+    .review-card { padding: 28px 22px; }
+
+    .faq-question { padding: 18px 20px; }
+    .faq-answer { padding: 0 20px 20px 48px; }
+  }
+
+  @media (min-width: 768px) {
+    .exp-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .exp-card { height: 560px; }
+
+    .reviews-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ========== LINE ICON SVG ========== */
+  .line-icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== FIXED CTA ========== -->
+<div class="fixed-cta" id="fixedCta">
+  <div class="fixed-cta-text">
+    <span class="fixed-cta-badge">● 残り枠わずか</span>
+    <strong>北海道リアル暮らし体験</strong>
+    <span>1日1組限定 ¥50,000</span>
+  </div>
+  <div class="fixed-cta-buttons">
+    <a href="#final-cta" class="btn-line">
+      <svg class="line-icon" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      <span>LINE予約</span>
+    </a>
+    <a href="#final-cta" class="btn-primary">
+      <span>今すぐ予約</span>
+    </a>
+  </div>
+</div>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-img" style="background-image: url('https://images.unsplash.com/photo-1548266652-99cf27701ced?w=1400&q=80');"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">1日1組限定・完全プライベート</div>
+    <h1 class="hero-title">
+      観光じゃない。<br>北海道の<em style="font-style:normal; color: #a8d4f0;">"暮らし"</em>を<br>体験する。
+      <span class="accent-line">人に会いに行く旅</span>
+    </h1>
+    <p class="hero-sub">
+      朝6時の雪かき、牧場の匂い、<br>地元民しか知らない食堂のカレー。<br>
+      写真には残らない記憶だけが、本物です。
+    </p>
+    <div class="hero-cta-wrap">
+      <a href="#final-cta" class="btn-primary"><span>体験の詳細を見る</span></a>
+      <a href="#timeline" class="btn-outline">1日の流れを見る</a>
+    </div>
+    <div class="hero-meta">
+      <span class="hero-meta-item"><span class="icon">📍</span> 北海道・現地集合</span>
+      <span class="hero-meta-item"><span class="icon">👥</span> 1〜4名</span>
+      <span class="hero-meta-item"><span class="icon">💴</span> ¥50,000 / 1組</span>
+      <span class="hero-meta-item"><span class="icon">🗓</span> 完全予約制</span>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ========== NUMBERS STRIP ========== -->
+<div class="numbers-strip">
+  <div class="numbers-grid">
+    <div class="number-item fade-in">
+      <div class="number-value">1<sup>組</sup></div>
+      <div class="number-label">1日の限定人数</div>
+    </div>
+    <div class="number-item fade-in fade-in-delay-1">
+      <div class="number-value">-10<sup>℃</sup></div>
+      <div class="number-label">冬の朝の気温</div>
+    </div>
+    <div class="number-item fade-in fade-in-delay-2">
+      <div class="number-value">100<sup>%</sup></div>
+      <div class="number-label">ローカル・リアル</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== EMPATHY ========== -->
+<section id="empathy">
+  <div class="empathy-inner">
+    <span class="section-label fade-in">HAVE YOU FELT THIS?</span>
+    <h2 class="empathy-title fade-in">
+      旅に出るたびに、<br>なんか違う気がする。
+    </h2>
+    <ul class="empathy-list fade-in">
+      <li>観光地はどこに行っても同じような店が並んでいる</li>
+      <li>SNSで見た景色を、SNSのために撮りに行くだけになっている</li>
+      <li>「楽しかったけど、何か残った気がしない」と旅の翌日に思う</li>
+      <li>地元の人と話したい気持ちはあるのに、結局ツアー客の中に埋もれる</li>
+      <li>もっと「人」に会いに行く旅がしたい</li>
+    </ul>
+    <div class="empathy-arrow fade-in">
+      <strong style="display:block; margin-bottom:8px; font-size:14px; letter-spacing:0.05em;">そのモヤモヤ、正直に言うと——</strong>
+      「観光」という枠に、あなた自身が飽きているのかもしれません。<br>
+      北海道には、観光地ではない北海道があります。
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONCEPT ========== -->
+<section id="concept">
+  <div class="concept-inner">
+    <span class="section-label fade-in">OUR CONCEPT</span>
+    <blockquote class="concept-quote fade-in">
+      「ここでは、生活に入ります。<br>
+      観光客ではなく、<em style="font-style:normal; color: var(--accent);">今日だけの地元民</em>として。」
+    </blockquote>
+    <p class="section-sub fade-in">
+      決まったルートはありません。
+      天気、気分、その日の状況に応じて、当日は移動を含めて1日ご一緒します。
+      大川の暮らしに入り込んでいく、それだけです。
+    </p>
+    <div class="concept-grid fade-in">
+      <div class="concept-card">
+        <div class="concept-card-label">NOT THIS</div>
+        <div class="concept-card-title">観光体験</div>
+        <p class="concept-card-text">人気スポットを回り、みんなと同じ写真を撮る。誰が行っても同じ体験。</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-label">THIS IS</div>
+        <div class="concept-card-title">暮らし体験</div>
+        <p class="concept-card-text">その朝だけの空気、その日だけの会話。二度と同じ日は来ない、あなただけの記憶。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EXPERIENCE CARDS ========== -->
+<section id="experience">
+  <div class="container-wide">
+    <span class="section-label fade-in">WHAT YOU'LL EXPERIENCE</span>
+    <h2 class="section-title fade-in">3つのリアル体験</h2>
+    <p class="section-sub fade-in">
+      五感が揺さぶられる瞬間だけを、厳選しました。
+    </p>
+    <div class="exp-cards">
+      <!-- Card 1 -->
+      <div class="exp-card fade-in">
+        <div class="exp-card-img" style="background-image: url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&q=80');"></div>
+        <div class="exp-card-overlay"></div>
+        <div class="exp-card-content">
+          <div class="exp-card-num">01 / 雪国生活</div>
+          <h3 class="exp-card-title">朝6時。気温−10℃。<br>雪かきから始まる朝。</h3>
+          <p class="exp-card-scene">
+            息が白くなる。体の芯まで冷える。スコップを握る手が、ゆっくり感覚を取り戻していく。
+            作業が終わると、薪ストーブの前に座る。じんわりと広がる温かさ。
+            大川が黙って差し出した熱い味噌汁を、言葉なく受け取る。
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">雪かき体験</span>
+            <span class="exp-tag">薪ストーブ</span>
+            <span class="exp-tag">地元の朝食</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="exp-card fade-in fade-in-delay-1">
+        <div class="exp-card-img" style="background-image: url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=900&q=80');"></div>
+        <div class="exp-card-overlay"></div>
+        <div class="exp-card-content">
+          <div class="exp-card-num">02 / 牧場体験</div>
+          <h3 class="exp-card-title">早朝の牧場。<br>牛たちの息が霧になる。</h3>
+          <p class="exp-card-scene">
+            ぬくもりのある動物の匂い。藁を踏む音。搾乳の手順を教わる。
+            両手に伝わるリズム。体温。生き物と向き合う静かな時間が、
+            スマホを忘れさせる。都会では絶対に味わえない、命との距離感。
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">搾乳体験</span>
+            <span class="exp-tag">動物との対話</span>
+            <span class="exp-tag">朝の牧場空気</span>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="exp-card fade-in fade-in-delay-2">
+        <div class="exp-card-img" style="background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?w=900&q=80');"></div>
+        <div class="exp-card-overlay"></div>
+        <div class="exp-card-content">
+          <div class="exp-card-num">03 / ローカル飯</div>
+          <h3 class="exp-card-title">観光客ゼロの食堂。<br>常連だけが知る味。</h3>
+          <p class="exp-card-scene">
+            看板もない。インターネットにも載っていない。
+            地元の農家のおじさんが隣に座り、今年の雪の話をする。
+            メニューはその日の気分で変わる。「これが北海道だよ」と大川が笑う。
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">地元民だけの空間</span>
+            <span class="exp-tag">会話が生まれる</span>
+            <span class="exp-tag">本物の北海道飯</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TIMELINE ========== -->
+<section id="timeline">
+  <div class="container">
+    <span class="section-label fade-in">A DAY IN YOUR STORY</span>
+    <h2 class="section-title fade-in">1日の<span>リアルな流れ</span></h2>
+    <p class="section-sub fade-in">
+      決まった行程はありません。これはあくまで一例。<br>
+      その日の状況に応じて柔軟にご案内します。
+    </p>
+    <div class="timeline-wrap">
+      <div class="timeline-line"></div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-time">
+          <div class="timeline-dot"></div>
+          <div class="timeline-hour">6:00</div>
+          <div class="timeline-ampm">AM</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-event">現地集合・雪かきスタート</div>
+          <p class="timeline-detail">まだ暗い空の下、息が白くなる中で合流。防寒具を確認し、大川の自宅周辺の雪かきへ。体が温まった頃、空が明るくなり始める。</p>
+          <span class="timeline-tag">気温 -10℃ / 真っ白な世界</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-in fade-in-delay-1">
+        <div class="timeline-time">
+          <div class="timeline-dot"></div>
+          <div class="timeline-hour">7:30</div>
+          <div class="timeline-ampm">AM</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-event">薪ストーブの前で朝食</div>
+          <p class="timeline-detail">大川の家で熱い味噌汁と地元産の米。薪がはぜる音。寒さで動いた体に、じんわりと食事が沁みる。その日のプランを話しながら、コーヒーを一杯。</p>
+          <span class="timeline-tag">北海道の地元朝食</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-in fade-in-delay-2">
+        <div class="timeline-time">
+          <div class="timeline-dot"></div>
+          <div class="timeline-hour">9:00</div>
+          <div class="timeline-ampm">AM</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-event">牧場へ。動物たちの時間に入る</div>
+          <p class="timeline-detail">知り合いの農家さんの牧場へ。搾乳の手伝い、牛の体温、藁の匂い。作業しながら農家さんが話す北海道の暮らし。SNSでは絶対に出てこない話。</p>
+          <span class="timeline-tag">完全プライベート訪問</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-time">
+          <div class="timeline-dot"></div>
+          <div class="timeline-hour">12:00</div>
+          <div class="timeline-ampm">PM</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-event">地元民しか行かない食堂でランチ</div>
+          <p class="timeline-detail">看板なし、インスタなし、観光客なし。大川の行きつけ。カウンターに座ると、常連のおじさんが話しかけてくる。ここにしかない空気がある。</p>
+          <span class="timeline-tag">観光ガイドに載らない店</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-in fade-in-delay-1">
+        <div class="timeline-time">
+          <div class="timeline-dot"></div>
+          <div class="timeline-hour">14:00</div>
+          <div class="timeline-ampm">PM</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-event">その日だけの「おまかせ」時間</div>
+          <p class="timeline-detail">天気・季節・気分で毎回変わる。近所の農家の作業を少し手伝ったり、地元の市場を歩いたり、何もしない時間を持ったり。決めるのはその瞬間の大川です。</p>
+          <span class="timeline-tag">毎回異なる・二度と同じ日はない</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-in fade-in-delay-2">
+        <div class="timeline-time">
+          <div class="timeline-dot"></div>
+          <div class="timeline-hour">17:00</div>
+          <div class="timeline-ampm">PM</div>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-event">夕食・大川家のご飯 or 行きつけの店へ</div>
+          <p class="timeline-detail">一日の疲れが、なぜか心地いい。日が落ちた北海道の空は、都会では見たことのない色をしている。テーブルを囲みながら、気づけば価値観の話をしている。</p>
+          <span class="timeline-tag">1日の締めくくり</span>
+        </div>
+      </div>
+      <div class="timeline-item fade-in">
+        <div class="timeline-time">
+          <div class="timeline-dot" style="background: var(--gold);"></div>
+          <div class="timeline-hour">夜</div>
+          <div class="timeline-ampm">〜</div>
+        </div>
+        <div class="timeline-body" style="border-left-color: var(--gold); background: var(--gold-light);">
+          <div class="timeline-event">現地解散・自由な夜</div>
+          <p class="timeline-detail">「また来たい」と思っているはず。北海道の静かな夜に、今日という日を振り返る。何かが少し変わった気がする——そのまま、眠りについてください。</p>
+          <span class="timeline-tag" style="background: var(--gold);">価値観が変わる夜</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMPARISON ========== -->
+<section id="comparison">
+  <div class="container-wide">
+    <span class="section-label fade-in">WHY THIS IS DIFFERENT</span>
+    <h2 class="section-title fade-in">なぜ、<span>この体験</span>なのか</h2>
+    <p class="section-sub fade-in">
+      一般的な観光や団体ツアーとは、根本的に違います。
+    </p>
+    <div style="overflow-x: auto;">
+      <table class="comparison-table fade-in">
+        <thead>
+          <tr>
+            <th>比較ポイント</th>
+            <th>一般観光</th>
+            <th>団体ツアー</th>
+            <th>この体験</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>人数</td>
+            <td>不特定多数</td>
+            <td>10〜30名</td>
+            <td class="check">1〜4名（完全プライベート）</td>
+          </tr>
+          <tr>
+            <td>地元との交流</td>
+            <td class="cross">ほぼなし</td>
+            <td class="cross">限定的</td>
+            <td class="check">リアルな会話・生活に入り込む</td>
+          </tr>
+          <tr>
+            <td>行程の柔軟性</td>
+            <td class="triangle">やや固定</td>
+            <td class="cross">完全固定</td>
+            <td class="check">当日の状況で柔軟に変化</td>
+          </tr>
+          <tr>
+            <td>SNS映え重視</td>
+            <td class="triangle">あり</td>
+            <td class="triangle">あり</td>
+            <td class="check">「映らない体験」こそ本物</td>
+          </tr>
+          <tr>
+            <td>再現性</td>
+            <td class="triangle">ほぼ同じ</td>
+            <td class="cross">完全に同じ</td>
+            <td class="check">二度と同じ日は来ない</td>
+          </tr>
+          <tr>
+            <td>体験後の変化</td>
+            <td class="cross">記憶に残りにくい</td>
+            <td class="cross">「楽しかった」で終わる</td>
+            <td class="check">価値観・視点が変わる</td>
+          </tr>
+          <tr>
+            <td>担当者との関係</td>
+            <td class="cross">ガイド（他人）</td>
+            <td class="cross">引率者</td>
+            <td class="check">「大川」という一人の人間</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STORY ========== -->
+<section id="story">
+  <div class="story-inner">
+    <span class="section-label fade-in" style="text-align:center; display:block;">OUR STORY</span>
+    <div class="story-img-wrap fade-in">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&q=80" alt="大川">
+    </div>
+    <div class="story-name fade-in">大川 — 北海道在住</div>
+    <div class="story-role fade-in">この体験の主催者 / ただの北海道の人間</div>
+    <div class="story-text fade-in">
+      <p>
+        東京の友人が遊びに来たとき、私は何も考えずに自分の日常を見せました。
+        朝の雪かき、牧場の手伝い、いつもの食堂でのランチ。
+        特別なことは何もしていないのに、帰り際に彼は言いました。
+      </p>
+      <div class="story-highlight">
+        「なんか、すごく生きた気がした。なんで観光じゃなくてこっちなんだろう。」
+      </div>
+      <p>
+        その一言が引っかかり続けました。
+        観光地を案内することが「もてなし」だと思っていたけれど、
+        本当に喜ばれたのは、私の「普通の1日」でした。
+      </p>
+      <p>
+        北海道は観光資源が豊富です。でも、それは外から貼られたラベルです。
+        私が好きなのは、気温-10℃の朝に湯気が立つ味噌汁の話でも、
+        牛の名前を全部覚えている農家のおじさんの話でも、
+        夜に星が多すぎて怖いくらいになる空の話でもない——
+        そういう「当たり前の暮らし」が、都会の人には非日常なんだと気づいた。
+      </p>
+      <p>
+        だから、観光地には連れて行きません。
+        私の1日に入ってもらうだけです。
+        それだけで十分だと、今は確信しています。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRICING ========== -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-label fade-in">PRICING</span>
+    <h2 class="section-title fade-in">料金</h2>
+    <p class="section-sub fade-in">
+      1日1組の完全プライベート。人数が増えるほど、一人あたりの負担は減ります。
+    </p>
+    <div class="price-card fade-in">
+      <div class="price-badge">
+        <span>●</span> 1日1組・枠数限定
+      </div>
+      <div class="price-main">1組あたり（1〜4名）</div>
+      <div class="price-value">
+        <sup>¥</sup>50,000<sub>/1組</sub>
+      </div>
+      <div class="price-note">* 現地集合・現地解散。交通費・宿泊費は含まれません。</div>
+      
+      <div class="price-per-person">
+        <div class="price-per-person-title">👥 人数別・1人あたりの目安</div>
+        <div class="price-breakdown">
+          <div class="price-breakdown-item">
+            <div class="price-breakdown-num">1名</div>
+            <div class="price-breakdown-val">¥50,000</div>
+          </div>
+          <div class="price-breakdown-item">
+            <div class="price-breakdown-num">2名</div>
+            <div class="price-breakdown-val">¥25,000</div>
+          </div>
+          <div class="price-breakdown-item">
+            <div class="price-breakdown-num">3名</div>
+            <div class="price-breakdown-val">¥16,600</div>
+          </div>
+          <div class="price-breakdown-item">
+            <div class="price-breakdown-num">4名</div>
+            <div class="price-breakdown-val highlight">¥12,500</div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="price-features">
+        <li>1日同行・完全プライベート対応</li>
+        <li>雪国生活・牧場・ローカル飯の3体験</li>
+        <li>当日の状況に応じた柔軟なご案内</li>
+        <li>大川との1日（会話・体験・記憶）</li>
+        <li>昼食代（地元食堂1食分）含む</li>
+        <li>体験中の飲み物・おやつ</li>
+      </ul>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <a href="#final-cta" class="btn-primary" style="width:100%;"><span>この体験を予約する</span></a>
+        <a href="#final-cta" class="btn-line" style="width:100%;">
+          <svg class="line-icon" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.630-.63h2.386c.346 0 .627.285.627.630 0 .349-.281.630-.63.630H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.090-.510-.250l-2.443-3.317v2.940c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.430-.595.060-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.330V8.108c0-.345.282-.630.630-.630.345 0 .630.285.630.630v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.630.630-.630.346 0 .628.285.628.630v4.771zm-2.466.629H4.917c-.345 0-.630-.285-.630-.629V8.108c0-.345.285-.630.630-.630.348 0 .630.285.630.630v4.141h1.756c.348 0 .629.283.629.630 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.270 8.842 10.035 9.608.391.082.923.258 1.058.590.120.301.079.766.038 1.080l-.164 1.020c-.045.301-.240 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          <span>LINEで相談・予約する</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SCARCITY ========== -->
+<section id="scarcity">
+  <div class="scarcity-inner">
+    <span class="section-label fade-in" style="color: rgba(255,255,255,0.5);">AVAILABILITY</span>
+    <h2 class="scarcity-title fade-in">
+      1日に受け入れられるのは、<br><strong style="color: #ffdb70;">1組だけです。</strong>
+    </h2>
+    <p class="scarcity-sub fade-in">
+      大川が1日をまるごと使う体験です。<br>
+      複数組を同時に受け入れることは、絶対にしません。<br>
+      週に数枠しかないため、人気の日程は早々に埋まります。
+    </p>
+    <div class="calendar-preview fade-in">
+      <div class="cal-day full">1</div>
+      <div class="cal-day full">2</div>
+      <div class="cal-day full">3</div>
+      <div class="cal-day available">4</div>
+      <div class="cal-day full">5</div>
+      <div class="cal-day full">6</div>
+      <div class="cal-day full">7</div>
+      <div class="cal-day full">8</div>
+      <div class="cal-day full">9</div>
+      <div class="cal-day available">10</div>
+      <div class="cal-day full">11</div>
+      <div class="cal-day full">12</div>
+      <div class="cal-day full">13</div>
+      <div class="cal-day full">14</div>
+      <div class="cal-day full">15</div>
+      <div class="cal-day full">16</div>
+      <div class="cal-day available">17</div>
+      <div class="cal-day full">18</div>
+      <div class="cal-day full">19</div>
+      <div class="cal-day full">20</div>
+      <div class="cal-day full">21</div>
+    </div>
+    <div class="scarcity-note fade-in">
+      <span class="scarcity-legend"><span class="legend-dot" style="background:rgba(231,76,60,0.5);"></span>予約済み</span>
+      <span class="scarcity-legend"><span class="legend-dot" style="background:rgba(255,255,255,0.3);"></span>空き枠</span>
+    </div>
+    <div class="fade-in">
+      <a href="#final-cta" class="btn-primary" style="background:white; color:var(--black);"><span>空き日程を確認して予約する</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REVIEWS ========== -->
+<section id="reviews">
+  <div class="container-wide">
+    <span class="section-label fade-in">REAL VOICES</span>
+    <h2 class="section-title fade-in">参加者の声</h2>
+    <p class="section-sub fade-in">
+      ありのままのフィードバックです。
+    </p>
+    <div class="reviews-grid">
+      <!-- Review 1 -->
+      <div class="review-card fade-in">
+        <span class="review-quote-icon">"</span>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          朝6時に雪かきした日のことが、数ヶ月経った今でも脳裏に焼きついています。
+          あの寒さと、あの味噌汁の温かさのセットが、忘れられない。
+          帰ってきて「なんとなく仕事してた」生活に戻れなくなりました。良い意味で。
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">松本 あかり</div>
+            <div class="review-meta">東京都在住 / 32歳 / デザイナー</div>
+            <span class="review-tag">2名参加</span>
+          </div>
+        </div>
+      </div>
+      <!-- Review 2 -->
+      <div class="review-card fade-in fade-in-delay-1">
+        <span class="review-quote-icon">"</span>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          牧場で搾乳した後、農家の方が「この牛はちょっと臆病でね」って言った瞬間、
+          急に泣きそうになって。なんで泣くのかわからないけど、
+          何かが動いた感じがしました。こんな体験、普通の旅では絶対に起きない。
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">T</div>
+          <div>
+            <div class="review-name">田中 雄大</div>
+            <div class="review-meta">神奈川県在住 / 28歳 / 会社員</div>
+            <span class="review-tag">1名参加</span>
+          </div>
+        </div>
+      </div>
+      <!-- Review 3 -->
+      <div class="review-card fade-in fade-in-delay-2">
+        <span class="review-quote-icon">"</span>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">
+          友人4人で参加。1人あたり12,500円でこれはおかしい（笑）。
+          ランチで隣に座ったおじさんと気づいたら1時間話してて、
+          その話が全員の中で一番印象に残ってます。
+          大川さんが「今日はあの店にしよう」って言った直感が全部当たってた。
+        </p>
+        <div class="review-author">
+          <div class="review-avatar">S</div>
+          <div>
+            <div class="review-name">佐藤 ゆかり</div>
+            <div class="review-meta">埼玉県在住 / 35歳 / 主婦</div>
+            <span class="review-tag">4名参加</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SAFETY / 不安解消 ========== -->
+<section id="safety">
+  <div class="container-wide">
+    <span class="section-label fade-in">PEACE OF MIND</span>
+    <h2 class="section-title fade-in">はじめてでも、<span>安心して参加できます</span></h2>
+    <p class="section-sub fade-in">
+      北海道に行ったことがない方、1人旅が初めての方、体験系が初めての方——<br>
+      大川が全力でサポートします。
+    </p>
+    <div class="safety-grid fade-in">
+      <div class="safety-card">
+        <div class="safety-icon">🌨</div>
+        <div class="safety-title">天候が悪くても大丈夫</div>
+        <p class="safety-text">大雪・吹雪の場合は、状況に応じて屋内体験や別プランに柔軟に変更します。北海道の悪天候もまた、体験の一部です。</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">📋</div>
+        <div class="safety-title">キャンセルポリシー</div>
+        <p class="safety-text">前日までのキャンセルは無料（予定変更）。当日キャンセルは50%のキャンセル料が発生します。体調不良の場合は別日への振替も相談可能です。</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">🧣</div>
+        <div class="safety-title">服装・準備はご案内します</div>
+        <p class="safety-text">予約確定後に、季節・気温に合わせた服装リストをお送りします。防寒具のレンタルについても対応可能ですのでご相談ください。</p>
+      </div>
+      <div class="safety-card">
+        <div class="safety-icon">🤝</div>
+        <div class="safety-title">初めての方・1人参加・大歓迎</div>
+        <p class="safety-text">1人での参加が最も多いです。体力不要・特別なスキル不要。「北海道に興味がある」それだけで十分です。大川が最初から最後まで一緒にいます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq">
+  <div class="container">
+    <span class="section-label fade-in">FAQ</span>
+    <h2 class="section-title fade-in">よくある<span>ご質問</span></h2>
+    <div class="faq-list fade-in">
+      <div class="faq-item open">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-icon">Q</span>
+          <span class="faq-q-text">移動はどうなりますか？</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          当日は移動を含めて1日ご一緒します。現地集合・現地解散が基本です。体験中の移動は状況に応じて柔軟に対応しますので、ご安心ください。北海道内の移動については、事前にご相談いただければ詳細をお伝えします。
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-icon">Q</span>
+          <span class="faq-q-text">1人でも参加できますか？</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          もちろんです。1人参加が最も多く、むしろ大川と深く話せ
+
+> ⚠️ **Response truncated** — this model took longer than 4.5 minutes. The partial output above has been saved.
